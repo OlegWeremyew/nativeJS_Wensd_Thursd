@@ -20,6 +20,206 @@ console.log('lesson 2');
 // https://learn.javascript.ru/recursion
 // https://www.youtube.com/watch?v=Kuq6oIN3PH0
 
+// {} - block code, function/class, loops, switch, try/catch/finally? if/else
+// let obj = {} // литерал объекта не создает область видимости
+
+// let globalScope = {
+//     outerScope: null,
+//     b: 100, // undefined -> 100
+//     f: 'Function',
+//     a: 10,
+//     someParam: undefined,
+//     d: 5,
+// };
+//
+// let a = 10;
+// let someParam;
+//
+// //d = 5; в не строгом режиме произойдет иницилизация переменной
+// //console.log(yo); - ошибка в любом режиме
+//
+// var b = 100;
+//
+// function f() {}
+//
+// console.log(a + b);
+
+
+// let globalScope = {
+//     outerScope: null,
+//     f: 'Function',
+//     a: 20,
+// };
+//
+// let a = 10;
+//
+// function f(someArg: any) {
+//     let fScope = {
+//         outerScope: globalScope,
+//         someArg: null, // undefined -> null
+//         c: 50, // undefined -> 50
+//     };
+//
+//     var c = 50;
+//     a += 10;
+// }
+//
+// f(null);
+//
+// console.log(a);
+
+
+// let globalScope = {
+//     outerScope: null,
+//     f: 'Function', // f
+//     a: 70, // 10 -> 20 -> 70
+//     result: 'Function', // innerFunc
+// };
+//
+// let a = 10;
+// function f(someArg: any) {
+//     let fScope = {
+//         outerScope: globalScope,
+//         someArg: 20, // undefined -> 20
+//         c: 50, // -> undefined
+//         innerFunc: 'Function',
+//     };
+//     var c = 50;
+//     a += 10;
+//     function innerFunc() {
+//         let innerFuncScope = {
+//             outerScope: fScope,
+//         }
+//         a += c;
+//         return someArg + c + a;
+//     }
+//     return innerFunc;
+// }
+//
+// let result  = f(20);
+// console.log(result()); // 140
+// console.log(a); //70
+
+
+// let globalScope = {
+//     outerScope: null,
+//     f: 'Function', // f
+//     result: 'Function', // innerFunc
+// };
+//
+// function f() {
+//     let fScope = {
+//         outerScope: globalScope,
+//         c: 150, // undefined -> 50 -> 100 -> 150;
+//         innerFunc: 'Function',
+//     };
+//     var c = 50;
+//     function innerFunc() {
+//         let innerFuncScope = {
+//             outerScope: fScope,
+//         }
+//         c += 50;
+//         return c;
+//     }
+//     return innerFunc;
+// }
+//
+// let result = f();
+// console.log(result()); // 100
+// console.log(result()); // 150
+
+// let globalScope = {
+//     c: undefined,
+//     fs: 'Function',
+// }
+//
+// fs();
+// if () {
+//     if () {
+//         let blocScope = {
+//             a: undefined
+//         }
+//         let a;
+//         if() {
+//             console.log(a)
+//             var c;
+//         } else {
+//             console.log(a)
+//             function fs() {}
+//             while (true) {
+//                 console.log(c);
+//                 console.log(a)
+//                 fs();
+//             }
+//         }
+//     }
+// }
+
+
+// f();
+// {
+//     let a = 10;
+//     function f() {
+//         console.log('Hello world!!!');
+//     }
+//     if (true) {
+//         console.log('inside block ', a);
+//     }
+// }
+//
+//
+// console.log(a);
+
+// let g = {
+//     i: undefined,
+// }
+// let arr = [];
+// arr.length = 10;
+//
+// for (let i = 0; i < arr.length; i++) {
+//     let loopS = {
+//         i: 0
+//     };
+//     (function(){
+//         let af = {
+//
+//         }
+//         console.log(i);
+//     })();
+// }
+
+
+///// Рекурсия
+
+// sumTo(1) = 1
+// sumTo(2) = 2 + 1 = 3
+// sumTo(3) = 3 + 2 + 1 = 6
+// sumTo(4) = 4 + 3 + 2 + 1 = 10
+// ...
+// sumTo(100) = 100 + 99 + ... + 2 + 1 = 5050
+
+// function sumTo(n: number) {
+//     let result = 0;
+//     for (let i = n; i > 0; i--) {
+//         result += i;
+//     }
+//     return result;
+// }
+
+// function sumTo(n: number):number {
+//     if (n === 1) return n;
+//     return n + sumTo(n - 1);
+// }
+//
+// console.log(sumTo(3));
+
+// function sumTo(n: number, acc: number):number {
+//     if (n === 1) return acc + n;
+//     return sumTo(n - 1, acc + n);
+// }
+// console.log(sumTo(3, 0));
+
+
 
 // Task 01
 // Реализовать функцию sum которая суммирует 2 числа следующим образом sum(3)(6) === 9
@@ -50,6 +250,26 @@ console.log('lesson 2');
 // 4) superSum(3)(2,5,3) //10
 // 5) superSum(3)(2,5)(3) //10
 // 6) superSum(3)(2,5)(3,9) //10
+
+function superSum(num: number) {
+    if (num <= 0) return 0;
+    if (num === 1) return (n: number) => n;
+    let _args: number[] = [];
+
+    function helper(...args: number[]) {
+        _args = [..._args, ...args];
+        if(_args.length >= num) {
+            _args.length = num;
+            return _args.reduce((acc, number) => acc + number);
+        } else {
+            return helper;
+        }
+    }
+
+    return helper;
+}
+//@ts-ignore
+console.log(superSum(2)(2)(5)(3)(4));
 
 // P.S. типизируйте только аргументы, а при вызове функции используйте @ts-ignore
 
