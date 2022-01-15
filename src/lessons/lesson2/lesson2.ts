@@ -206,6 +206,7 @@ console.log('lesson 2');
 //     return result;
 // }
 
+//Рекурсия
 // function sumTo(n: number):number {
 //     if (n === 1) return n;
 //     return n + sumTo(n - 1);
@@ -213,6 +214,8 @@ console.log('lesson 2');
 //
 // console.log(sumTo(3));
 
+
+//Хвостовая рекурсия
 // function sumTo(n: number, acc: number):number {
 //     if (n === 1) return acc + n;
 //     return sumTo(n - 1, acc + n);
@@ -224,6 +227,15 @@ console.log('lesson 2');
 // Task 01
 // Реализовать функцию sum которая суммирует 2 числа следующим образом sum(3)(6) === 9
 
+/*
+function sum(x) {
+    return function (y) {
+        return x + y
+    }
+}
+console.log(sum(3)(6))
+ */
+
 // Task 02
 // Реализовать функцию makeCounter которая работает следующим образом:
 // const counter = makeCounter();
@@ -233,6 +245,23 @@ console.log('lesson 2');
 // counter2(); // 1
 // counter(); // 3
 
+/*
+function makeCounter() {
+    let count = 0
+    return function () {
+        return count++
+    }
+}
+
+const counter = makeCounter()
+const counter2 = makeCounter()
+console.log(counter())
+console.log(counter())
+console.log(counter2())
+console.log(counter())
+
+ */
+
 // Task 03
 // Переписать функцию из Task 02 так, что бы она принимала число в качестве аргумента и это число было стартовым значением счетчика
 // и возвращала следующий объект методов:
@@ -240,6 +269,42 @@ console.log('lesson 2');
 // decrease: -1
 // reset: установить счетчик в 0;
 // set: установить счетчик в заданное значение;
+
+/*
+function sum(count) {
+    let privateCounter = count;
+
+    function changeBy(val) {
+        privateCounter += val;
+    }
+
+    return {
+        increment: function () {
+            changeBy(1);
+        },
+        decrement: function () {
+            changeBy(-1);
+        },
+        reset: function () {
+            return privateCounter = 0;
+        },
+        set: function () {
+            return privateCounter;
+        },
+    };
+};
+
+const Counter = sum(10)
+
+
+Counter.increment() //1
+Counter.increment() //2
+Counter.decrement() //1
+Counter.increment() //2
+Counter.increment() //3
+
+console.log(Counter.set()) // 10 + 3 => 13
+ */
 
 // Task 04*
 // Реализовать функцию superSum которая принимает число в качестве аргумента, которое указывает на количество слагаемых
@@ -276,8 +341,73 @@ console.log(superSum(2)(2)(5)(3)(4));
 // Task 05
 // решить все задачи по рекурсии которые даны в конце статьи https://learn.javascript.ru/recursion
 
+
+//============================================================================
 // Task 06
 // написать функцию, которая повторяет функционал метода flat массива на всю глубину.
+
+/* пример метода flat
+var arr1 = [1, 2, [3, 4]];
+arr1.flat();
+// [1, 2, 3, 4]
+
+var arr2 = [1, 2, [3, 4, [5, 6]]];
+arr2.flat();
+// [1, 2, 3, 4, [5, 6]]
+
+var arr3 = [1, 2, [3, 4, [5, 6]]];
+arr3.flat(2);
+// [1, 2, 3, 4, 5, 6]
+ */
+
+/* Для развёртывания многомерных массивов используем рекурсию, reduce и concat
+const arr = [1, 2, [3, 4, [5, 6]]];
+
+function flatDeep(arr, d = 1) {
+   return d > 0 ? arr.reduce((acc, val) => acc.concat(Array.isArray(val) ? flatDeep(val, d - 1) : val), [])
+                : arr.slice();
+};
+
+flatDeep(arr, Infinity);
+// [1, 2, 3, 4, 5, 6]
+ */
+
+/* не рекурсивное упрощение с использованием стэка
+var arr1 = [1,2,3,[1,2,3,4, [2,3,4]]];
+function flatten(input) {
+  const stack = [...input];
+  const res = [];
+  while (stack.length) {
+    // забираем последнее значение
+    const next = stack.pop();
+    if (Array.isArray(next)) {
+      // добавляем к массиву элементы не модифицируя исходное значение
+      stack.push(...next);
+    } else {
+      res.push(next);
+    }
+  }
+  //разворачиваем массив, чтобы восстановить порядок элементов
+  return res.reverse();
+}
+flatten(arr1);// [1, 2, 3, 1, 2, 3, 4, 2, 3, 4]
+ */
+
+/*
+//рекурсивно упрощаем массив
+function flatten(array) {
+  var flattend = [];
+  (function flat(array) {
+    array.forEach(function(el) {
+      if (Array.isArray(el)) flat(el);
+      else flattend.push(el);
+    });
+  })(array);
+  return flattend;
+}
+ */
+//============================================================================
+
 
 // just a plug
 export default () => {};
