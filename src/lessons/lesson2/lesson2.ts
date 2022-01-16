@@ -316,7 +316,7 @@ console.log(Counter.set()) // 10 + 3 => 13
 // 5) superSum(3)(2,5)(3) //10
 // 6) superSum(3)(2,5)(3,9) //10
 
-function superSum(num: number) {
+/*function superSum(num: number) {
     if (num <= 0) return 0;
     if (num === 1) return (n: number) => n;
     let _args: number[] = [];
@@ -334,7 +334,7 @@ function superSum(num: number) {
     return helper;
 }
 //@ts-ignore
-console.log(superSum(2)(2)(5)(3)(4));
+console.log(superSum(2)(2)(5)(3)(4));*/
 
 // P.S. типизируйте только аргументы, а при вызове функции используйте @ts-ignore
 
