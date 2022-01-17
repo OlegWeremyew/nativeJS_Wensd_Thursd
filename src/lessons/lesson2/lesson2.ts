@@ -270,14 +270,14 @@ console.log(counter())
 // reset: установить счетчик в 0;
 // set: установить счетчик в заданное значение;
 
-/*
-function sum(count) {
+
+// ====================  Первое решение ============================
+/*function sum(count: number) {
     let privateCounter = count;
 
-    function changeBy(val) {
+    function changeBy(val: number) {
         privateCounter += val;
     }
-
     return {
         increment: function () {
             changeBy(1);
@@ -296,15 +296,40 @@ function sum(count) {
 
 const Counter = sum(10)
 
-
 Counter.increment() //1
 Counter.increment() //2
 Counter.decrement() //1
 Counter.increment() //2
 Counter.increment() //3
 
-console.log(Counter.set()) // 10 + 3 => 13
- */
+console.log(Counter.set()) // 10 + 3 => 13*/
+
+// ====================  Второе решение ============================
+
+const calc = (a: number) => {
+    let n = a
+    return {
+        increase() {
+            return ++n
+        },
+        decrease() {
+            return --n
+        },
+        reset() {
+            return n = 0
+        },
+        set() {
+            return n = a
+        },
+    }
+}
+
+let sum1 = calc(3)
+console.log(sum1.increase())
+console.log(sum1.increase())
+
+
+
 
 // Task 04*
 // Реализовать функцию superSum которая принимает число в качестве аргумента, которое указывает на количество слагаемых
