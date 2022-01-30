@@ -229,16 +229,106 @@ console.log('lesson 3');
 //         console.log('err ', err);
 //         return 'Hellow world'
 //     })
+//console.log('start')
+// Promise.resolve(10).then(console.log);
+// //setInterval(console.log, 100, 'Yo');
+// Promise.reject(0).catch(console.log);
+// let i = 0;
+// while (i < 5000000000) {
+//     i++
+// }
+// console.log('end')
+//
 
-console.log('start')
-Promise.resolve(10).then(console.log);
-//setInterval(console.log, 100, 'Yo');
-Promise.reject(0).catch(console.log);
-let i = 0;
-while (i < 5000000000) {
-    i++
-}
-console.log('end')
+// const func = async () => {}
+// async function f() {
+//     const response = await someRequest()
+// }
+//
+// f()
+
+// async function f() {
+//     console.log('start function code');
+//     console.log('end function code');
+// }
+//
+// console.log('start');
+// f().then(() => {
+//     console.log('Promise');
+// });
+// console.log('end');
+
+
+
+// async function f() {
+//     console.log('start function code');
+//     const response = await new Promise (res => {
+//         setTimeout(()=> {
+//             res('Async response');
+//         }, 1000);
+//     })
+//     console.log('response ', response);
+//     console.log('end function code');
+// }
+//
+// console.log('start');
+// f().then(() => {
+//     console.log('Promise');
+// });
+// console.log('end');
+
+//
+// async function f() {
+//     try {
+//         console.log('start function code');
+//         const response = await new Promise (( res, rej ) => {
+//             setTimeout(()=> {
+//                 rej('Rejected');
+//             }, 1000);
+//         })
+//         console.log('response ', response);
+//         console.log('end function code');
+//     } catch (err) {
+//         secondRequest();
+//     }
+// }
+//
+// async function secondRequest() {
+//     try {
+//         // some request
+//     } catch (e) {
+//         console.log('SomeComponentName secondRequest ')
+//         console.log('Args ', a1 ,a2 ,a3)
+//         console.log(e);
+//         // error hendler
+//     }
+// }
+
+// console.log('start');
+// f();
+// // f().then(() => {
+// //     console.log('Promise');
+// // }).catch(err => {
+// //     console.log('err ', err);
+// // });
+// console.log('end');
+
+
+
+// async function f() {
+//     console.log('start function code');
+//     const response = await Promise.resolve('Yo');
+//     console.log('response ', response);
+//     console.log('end function code');
+// }
+
+// console.log('start');
+// f().then(() => {
+//     console.log('Promise');
+// });
+// console.log('end');
+
+
 
 
 // setTimeout(console.log, 1000, 5000);
