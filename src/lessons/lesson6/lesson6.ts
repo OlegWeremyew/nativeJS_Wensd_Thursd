@@ -259,6 +259,9 @@ console.dir(Test)
 // Создать массив из десяти элементов такого типа, упорядочить записи по возрастанию среднего балла.
 // Добавить возможность вывода фамилий и номеров групп студентов, имеющих оценки, равные только 4 или 5.
 
+
+//let summ = [student1, student2, student3].sort((a,b) => b.score.reduce((e, f) => e + f, 0) - a.score.reduce((c, d) => c + d, 0))
+
 // Task 02
 // Создать класс с двумя переменными. Добавить конструктор с входными параметрами и инициализирующий члены класса по умолчанию.
 // Можно ли создать метод на экземпляре класса который будет удалять сам экземпляр класса?
@@ -271,16 +274,137 @@ console.dir(Test)
 // Создать метод выводящий время в строке формата HH:MM:SS
 // Создать класс по вышеуказанному описанию
 
+class Clock {
+    private date: Date
+    private hours: number
+    private minutes: number
+    private seconds: number
+
+    constructor() {
+        this.date = new Date()
+        this.hours = this.date.getHours()
+        this.minutes = this.date.getMinutes()
+        this.seconds = this.date.getSeconds()
+    }
+
+    private translate(method: number) {
+        if (method < 10) {
+            return '0' + method
+        }
+        return method
+    }
+
+    public setHours(hours: number, minutes: number, seconds: number) {
+        this.hours = hours
+        this.minutes = minutes
+        this.seconds = seconds
+    }
+
+    public getTime() {
+        return `${this.translate(this.hours)}:${this.translate(this.minutes)}:${this.translate(this.seconds)}`
+    }
+
+}
+
 // Task 04
 // Класс Покупатель: Фамилия, Имя, Адрес, Номер банковского счета;
 // Методы: установка значений атрибутов, получение значений атрибутов, вывод информации.
 // Создать массив объектов данного класса.
 // Вывести список покупателей в алфавитном порядке и список покупателей, у которых номер кредитной карточки находится в заданном диапазоне.
 
+  class Customer {
+    name: string = ''
+    secondName: string = ''
+    address: string = ''
+    numberCard: number = 0
+
+    constructor(name: string, secondName: string, address: string, numberCard: number) {
+      this.name = name
+      this.secondName = secondName
+      this.address = address
+      this.numberCard = numberCard
+    }
+
+    setName(value: string) {
+      this.name = value
+    }
+
+    setSecondName(value: string) {
+      this.secondName = value
+    }
+
+    setAddress(value: string) {
+      this.address = value
+    }
+
+    setNumberCard(value: number) {
+      this.numberCard = value
+    }
+
+    getInformation() {
+      console.log({
+        name: this.name,
+        secondName: this.secondName,
+        address: this.address,
+        numberCard: this.numberCard,
+      })
+    }
+  }
+
+  let arr = [
+    new Customer('Andrew', 'donkey', 'Minsk', 10),
+    new Customer('Clen', 'Melt', 'Minsk', 11),
+    new Customer('Wen', 'bottle', 'Minsk', 12),
+    new Customer('Bob', 'pain', 'Minsk', 14),
+  ]
+
+  // @ts-ignore
+  let result = arr
+    .sort((a, b) => a.name > b.name ? -1 : 1)
+    .filter((el) => el.numberCard > 10 && el.numberCard < 14)
+
+  console.log(result)
+
+// @ts-ignore
+  window.newCustomer = new Customer()
+
 // Task 05
 // Создать класс машина - имеющий марку, число цилиндров, мощность. Определить конструктор и функцию печати.
 // Создать производный класс – грузовик, имеющий грузоподъемность кузова.
 // Определить функции переназначения марки и грузоподъемности.
+
+
+class Car {
+
+    mark: string
+    rounds: number
+
+    constructor(mark: string, rounds: number) {
+        this.mark = mark
+        this.rounds = rounds
+    }
+
+    showInfo() {
+        console.log(this)
+    }
+
+}
+
+// @ts-ignore
+window.Car = new Car('Audi', 10, 700)
+
+class BigCar extends Car {
+
+    weight: number
+    rounds: number
+
+    constructor(mark: string, rounds: number, weight: number) {
+        super(mark, rounds);
+        this.weight = weight
+        this.rounds = rounds
+    }
+}
+
 
 // just a plug
 export default () => {
